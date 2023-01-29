@@ -1,21 +1,63 @@
 ---
 title: "Portfolio1"
+author: "Ryan Wheat"
+date:
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+## Load packages and data
+
+```{r load-packages}
+library(tidyverse)
 ```
 
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r load-data}
+blood_pressure <- read_stata("25505-0011-Data.dta")
 ```
+
+
+## Gender Breakdown
+
+```{r histogram-bp}
+
+#histogram of bp
+
+ggplot(data = blood_pressure %>%
+         filter(BPXDI1 > 0), 
+       mapping = aes(x = BPXDI1)) + geom_histogram(color = "black", fill = "white" ) + labs(x = "Diastolic Blood Pressure")
+
+```
+
+```{r gender-histogram-bp}
+
+#histogram of bp faceted by gender
+
+ggplot(data = blood_pressure %>%
+         filter(BPXDI1 > 0), 
+       mapping = aes(x = BPXDI1)) + geom_histogram(color = "black", fill = "white") + facet_wrap(~ RIAGENDR) + labs(subtitle = "1 = Male, 2 = Female") + labs(x = "Diastollic Blood Pressure") + theme_dark()
+```
+
+```{r density-dist-gender}
+
+#density distribution of bp, comparing genders
+
+ggplot(data = blood_pressure %>%
+         filter(BPXDI1 > 0), 
+       mapping = aes(x = BPXDI1)) + geom_density()
+
+```
+
+
+```{r marital-status}
+
+#density distribution of marital status on bp
+
+ggplot(data = blood_pressure %>%
+         filter(BPXDI1 > 0), 
+       mapping = aes(x = BPXDI1)) + geom_density() + facet_wrap(~ DMDMARTL)
+```
+```
+
 
 ## Including Plots
 
