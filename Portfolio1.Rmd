@@ -9,10 +9,11 @@ output: html_document
 
 ```{r load-packages}
 library(tidyverse)
+library(haven)
 ```
 
 ```{r load-data}
-blood_pressure <- read_stata("25505-0011-Data.dta")
+blood_pressure <- read_dta("25505-0011-Data.dta")
 ```
 
 
@@ -43,7 +44,7 @@ ggplot(data = blood_pressure %>%
 
 ggplot(data = blood_pressure %>%
          filter(BPXDI1 > 0), 
-       mapping = aes(x = BPXDI1)) + geom_density()
+       mapping = aes(x = BPXDI1, color = as.factor(RIAGENDR))) + geom_density()
 
 ```
 
