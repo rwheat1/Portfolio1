@@ -34,7 +34,7 @@ ggplot(data = blood_pressure %>%
 
 ggplot(data = blood_pressure %>%
          filter(BPXDI1 > 0), 
-       mapping = aes(x = BPXDI1)) + geom_histogram(color = "black", fill = "white") + facet_wrap(~ RIAGENDR) + labs(subtitle = "1 = Male, 2 = Female") + labs(x = "Diastollic Blood Pressure") + theme_dark()
+       mapping = aes(x = BPXDI1)) + geom_histogram(color = "black", fill = "white") + facet_wrap(~ RIAGENDR) + labs(subtitle = "1 = Male, 2 = Female") + labs(x = "Diastolic Blood Pressure") + theme_dark()
 ```
 
 ```{r density-dist-gender}
@@ -47,14 +47,27 @@ ggplot(data = blood_pressure %>%
 
 ```
 
+## Marital Status Breakdown
 
-```{r marital-status}
+```{r marital-histogram-bp}
+
+#histogram of marital status on bp
+
+ggplot(data = blood_pressure %>%
+         filter(BPXDI1 > 0),
+       mapping = aes(x = BPXDI1, color = DMDMARTL)) + geom_histogram()
+
+
+```
+
+
+```{r marital-density-bp}
 
 #density distribution of marital status on bp
 
 ggplot(data = blood_pressure %>%
          filter(BPXDI1 > 0), 
-       mapping = aes(x = BPXDI1)) + geom_density() + facet_wrap(~ DMDMARTL)
+       mapping = aes(x = BPXDI1)) + geom_density()
 ```
 ```
 
